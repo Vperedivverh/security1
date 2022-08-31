@@ -1,6 +1,6 @@
 package ru.kata.spring.boot_security.demo.controller;
 
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
-import java.security.Principal;
-
 @Controller
 
 public class AdminController {
+    private final PasswordEncoder passwordEncoder;
 
     private final UserService userService;
 
-    public AdminController(UserService userService) {
+    public AdminController(PasswordEncoder passwordEncoder, UserService userService) {
+        this.passwordEncoder = passwordEncoder;
         this.userService = userService;
     }
 
@@ -28,7 +28,16 @@ public class AdminController {
 
     @PostMapping("/admin")
     public String saveUser(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
+        User user1 = new User();
+        user1.setPassword(passwordEncoder.encode(user.getPassword()));
+        user1.setName(user.getName());
+        user1.setSurname(user.getSurname());
+        user1.setAddress(user.getAddress());
+        user1.setRoles(user.getRoles());
+        user1.setFn(user.getFn());
+        user1.setId(user.getId());
+        user1.setUsername(user.getUsername());
+        userService.saveUser(user1);
         return "redirect:/admin";
     }
 
@@ -47,7 +56,16 @@ public class AdminController {
 
     @PostMapping("/admin/users/{id}")
     public String updateUser(@PathVariable int id, @ModelAttribute("user") User user) {
-        userService.updateUser(user);
+        User user1 = new User();
+        user1.setPassword(passwordEncoder.encode(user.getPassword()));
+        user1.setName(user.getName());
+        user1.setSurname(user.getSurname());
+        user1.setAddress(user.getAddress());
+        user1.setRoles(user.getRoles());
+        user1.setFn(user.getFn());
+        user1.setId(user.getId());
+        user1.setUsername(user.getUsername());
+        userService.updateUser(user1);
         return "redirect:/admin";
     }
 

@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.service;
 
 
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,7 +33,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void saveUser(User user) {
-        userRepository.save(user);
+        userRepository.saveAndFlush(user);
     }
 
     @Override
@@ -45,15 +44,6 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User updateUser(User user) {
-//        User createdUser = getUser(user.getId());
-//        createdUser.setId(user.getId());
-//        createdUser.setName(user.getName());
-//        createdUser.setSurname(user.getSurname());
-//        createdUser.setAddress(user.getAddress());
-//        createdUser.setFn(user.getFn());
-//        createdUser.setSurname(user.getUsername());
-//        createdUser.setPassword(user.getPassword()  );
-//        createdUser.setRoles(user.getRoles());
         return userRepository.saveAndFlush(user);
     }
 
@@ -71,7 +61,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
-
         if (user == null) {
             throw new UsernameNotFoundException(String.format("User with email" + username + " not found"));
         }
@@ -80,7 +69,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private Collection<? extends GrantedAuthority> rolesToAuthorities(Collection<Role> roles) {
-        return roles.stream().map(r->new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
+        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
     }
 
 
