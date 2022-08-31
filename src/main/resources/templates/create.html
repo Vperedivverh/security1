@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>создать пользователя</title>
+  </head>
+<body>
+<h1>новый пользователь</h1>
+                <form th:action="@{/admin}" th:object="${user}" method="post">
+
+                        <label>Имя </label>
+                        <input
+                                type="text"
+                                name="name"
+
+                                value=""
+                                placeholder="Имя"/>
+
+                        <label>Фамилия</label>
+                        <input
+                                type="text"
+                                name="surname"
+                                value=""
+                                placeholder="Фамилия"/>
+                        <label>адрес</label>
+                        <input
+                                type="text"
+                                name="address"
+
+                                value=""
+                                placeholder="адрес"/>
+                        <label>номер телефона</label>
+                        <input
+                                type="number"
+                                name="fn"
+
+                                value=""
+                                placeholder="телефон"/>
+
+                        <label>email</label>
+                        <input
+                                type="text"
+                                name="email"
+                                value=""
+                                placeholder="email"/>
+
+                        <label>password</label>
+                        <input
+                                type="password"
+                                name="password"
+                                value=""
+                                placeholder="password"/>
+
+                        <label>role</label>
+                        <input
+                                type="text"
+                                name="roles"
+                                value=""
+                                placeholder="role"/>
+
+                    <div class="box-footer">
+                        <button type="submit">
+                            Submit
+                        </button>
+
+                </form>
+
+</body>
+</html>

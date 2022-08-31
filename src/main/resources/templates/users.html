@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>все пользователи</title>
+</head>
+<body>
+<h1>все пользователи</h1>
+<a th:href="@{/admin/users/new}">создать нового пользователя</a>
+<table>
+    <thead>
+    <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>адрес</th>
+        <th>телефон</th>
+        <th>email</th>
+        <th>пароль</th>
+        <th>роли</th>
+        <th>действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user: ${users}">
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.surname}"></td>
+        <td th:text="${user.address}"></td>
+        <td th:text="${user.fn}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.password}"></td>
+        <td th:text="${user.roles}"></td>
+
+        <td>
+            <a th:href="@{/admin/users/edit/{id}(id=${user.id})}">изменить</a>
+            <a th:href="@{/admin/users/{id}(id=${user.id})}">удалить</a>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+<a th:href="@{/logout}">выйти</a>
+</body>
+</html>
