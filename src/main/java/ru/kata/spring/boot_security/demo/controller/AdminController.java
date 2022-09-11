@@ -1,12 +1,18 @@
 package ru.kata.spring.boot_security.demo.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
+
+;
 
 @Controller
 
@@ -21,23 +27,16 @@ public class AdminController {
     }
 
     @GetMapping("/admin")
-    public String showUsers(Model model) {
+    public String showUsers(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("user", userService.getByUsername(userDetails.getUsername()));
+        model.addAttribute("roles", userService.getByUsername(userDetails.getUsername()).getRoles());
         return "users";
     }
 
     @PostMapping("/admin")
     public String saveUser(@ModelAttribute("user") User user) {
-        User user1 = new User();
-        user1.setPassword(passwordEncoder.encode(user.getPassword()));
-        user1.setName(user.getName());
-        user1.setSurname(user.getSurname());
-        user1.setAddress(user.getAddress());
-        user1.setRoles(user.getRoles());
-        user1.setFn(user.getFn());
-        user1.setId(user.getId());
-        user1.setUsername(user.getUsername());
-        userService.saveUser(user1);
+        userService.saveUser(user);
         return "redirect:/admin";
     }
 
@@ -51,21 +50,13 @@ public class AdminController {
     public String createUser(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        return "create";
+        return "users";
     }
 
     @PostMapping("/admin/users/{id}")
     public String updateUser(@PathVariable int id, @ModelAttribute("user") User user) {
-        User user1 = new User();
-        user1.setPassword(passwordEncoder.encode(user.getPassword()));
-        user1.setName(user.getName());
-        user1.setSurname(user.getSurname());
-        user1.setAddress(user.getAddress());
-        user1.setRoles(user.getRoles());
-        user1.setFn(user.getFn());
-        user1.setId(user.getId());
-        user1.setUsername(user.getUsername());
-        userService.updateUser(user1);
+
+        userService.updateUser(user);
         return "redirect:/admin";
     }
 
