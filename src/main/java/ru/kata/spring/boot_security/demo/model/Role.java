@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
@@ -15,16 +16,41 @@ public class Role implements GrantedAuthority {
     @Column(name = "name")
     private String name;
 
+
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
+
+    public Role() {
+    }
+
     public Role(String name) {
         this.name = name;
     }
 
-    public Role() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String getAuthority() {
         return this.name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
     @Override
@@ -34,15 +60,11 @@ public class Role implements GrantedAuthority {
         Role role = (Role) o;
         return id == role.id && Objects.equals(name, role.name);
     }
+
     @Override
-    public String toString() {
-        return name;
-    }
-    public String getName() {
-        return name;
+    public int hashCode() {
+        return Objects.hash(id, name, users);
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
 }

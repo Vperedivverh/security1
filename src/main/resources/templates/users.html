@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>все пользователи</h1>
-<a th:href="@{/admin/users/new}">создать нового пользователя</a>
+<a th:href="@{/admin/users/new}"><input type="submit" value="добавить пользователя"/></a>
 <table>
     <thead>
     <tr>
@@ -25,19 +25,25 @@
         <td th:text="${user.name}"></td>
         <td th:text="${user.surname}"></td>
         <td th:text="${user.address}"></td>
-        <td th:text="${user.fn}"></td>
+        <td th:text="${user.phoneNumber}"></td>
         <td th:text="${user.username}"></td>
         <td th:text="${user.password}"></td>
         <td th:text="${user.roles}"></td>
 
         <td>
-            <a th:href="@{/admin/users/edit/{id}(id=${user.id})}">изменить</a>
-            <a th:href="@{/admin/users/{id}(id=${user.id})}">удалить</a>
+        <td>
+            <a th:href="@{/admin/users/edit/{id}(id=${user.id})}"><input type="submit" value="изменить"/></a>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{/admin/users/{id}(id=${user.getId})}">
+                <input type="submit" value="удалить"/>
+            </form>
+        </td>
         </td>
     </tr>
     </tbody>
 
 </table>
-<a th:href="@{/logout}">выйти</a>
+<a th:href="@{/logout}"><input type="submit" value="покинуть эту скорбную страничку"/></a>
 </body>
 </html>

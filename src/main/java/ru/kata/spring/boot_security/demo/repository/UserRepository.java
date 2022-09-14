@@ -5,8 +5,8 @@ import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.User;
 
 @Repository
-public interface UserRepository extends JpaRepository <User, Integer>{
+public interface UserRepository extends JpaRepository<User, Integer> {
 
-   public User getUserByUsername(String username);
+    public User getUserByUsername(String username);
 
 }
