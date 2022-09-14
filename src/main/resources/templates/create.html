@@ -3,67 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <title>создать пользователя</title>
-  </head>
+</head>
 <body>
 <h1>новый пользователь</h1>
-                <form th:action="@{/admin}" th:object="${user}" method="post">
+<form th:action="@{/admin}" th:object="${user}" method="post">
 
-                        <label>Имя </label>
-                        <input
-                                type="text"
-                                name="name"
+    <label>Имя </label>
+    <input
+            type="text"
+            name="name"
+            th:field="*{name}"
 
-                                value=""
-                                placeholder="Имя"/>
+            value=""
+            placeholder="Имя"/>
 
-                        <label>Фамилия</label>
-                        <input
-                                type="text"
-                                name="surname"
-                                value=""
-                                placeholder="Фамилия"/>
-                        <label>адрес</label>
-                        <input
-                                type="text"
-                                name="address"
+    <label>Фамилия</label>
+    <input
+            type="text"
+            name="surname"
+            value=""
+            placeholder="Фамилия"/>
+    <label>адрес</label>
+    <input
+            type="text"
+            name="address"
 
-                                value=""
-                                placeholder="адрес"/>
-                        <label>номер телефона</label>
-                        <input
-                                type="number"
-                                name="fn"
+            value=""
+            placeholder="адрес"/>
+    <label>номер телефона</label>
+    <input
+            type="number"
+            name="fn"
 
-                                value=""
-                                placeholder="телефон"/>
+            value=""
+            placeholder="телефон"/>
 
-                        <label>email</label>
-                        <input
-                                type="text"
-                                name="username"
-                                value=""
-                                placeholder="email"/>
+    <label>email</label>
+    <input
+            type="text"
+            name="username"
+            value=""
+            placeholder="email"/>
 
-                        <label>password</label>
-                        <input
-                                type="password"
-                                name="password"
-                                value=""
-                                placeholder="password"/>
+    <label>password</label>
+    <input
+            type="password"
+            name="password"
+            value=""
+            placeholder="password"/>
 
-                        <label>role</label>
-                        <input
-                                type="text"
-                                name="roles"
-                                value=""
-                                placeholder="role"/>
+    <label>role</label>
+    <input
+            type="text"
+            name="roles"
+            value=""
+            placeholder="role"/>
 
-                    <div class="box-footer">
-                        <button type="submit">
-                            Submit
-                        </button>
+    <div class="box-footer">
+        <button type="submit">
+            Submit
+        </button>
 
-                </form>
+</form>
 
 </body>
 </html>

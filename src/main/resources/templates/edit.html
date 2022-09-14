@@ -3,61 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>update user</title>
-   </head>
+</head>
 <body>
-            <h1>Update user</h1>
-                <form th:action="@{/admin/users/{id}(id=${user.id})}" th:object="${user}" method="post">
+<h1>Update user</h1>
+<form th:action="@{/admin/users/{id}(id=${user.id})}" th:object="${user}" method="post">
 
-                        <label>Имя </label>
-                        <input type="text"
-                                name="name"
+    <label>Имя </label>
+    <input type="text"
+           name="name"
 
-                                th:field="*{name}"
-                                placeholder="введите Имя"/>
+           th:field="*{name}"
+           placeholder="введите Имя"/>
 
-                        <label>Фамилия</label>
-                        <input
-                                type="text"
-                                name="surname"
-                                th:field="*{surname}"
-                                placeholder="введите Фамилию"/>
-                        <label>адрес</label>
-                        <input
-                                type="text"
-                                name="address"
-                                th:field="*{address}"
-                                placeholder="введите адрес"/>
-                        <label>телефон</label>
-                        <input
-                                type="number"
-                                name="fn"
-                                th:field="*{fn}"
-                                placeholder="введите номер"/>
-                        <label>email</label>
-                        <input
-                                type="text"
-                                name="email"
-                                th:field="*{username}"
-                                placeholder="введите email"/>
-                        <label>password</label>
-                        <input
-                                type="password"
-                                name="password"
-                                th:field="*{password}"
-                                placeholder="введите пароль"/>
-                        <label>роль</label>
-                        <input
-                                type="text"
-                                name="roles"
-                                th:field="*{roles}"
-                                placeholder="роль"/>
+    <label>Фамилия</label>
+    <input
+            type="text"
+            name="surname"
+            th:field="*{surname}"
+            placeholder="введите Фамилию"/>
+    <label>адрес</label>
+    <input
+            type="text"
+            name="address"
+            th:field="*{address}"
+            placeholder="введите адрес"/>
+    <label>телефон</label>
+    <input
+            type="number"
+            name="fn"
+            th:field="*{fn}"
+            placeholder="введите номер"/>
+    <label>email</label>
+    <input
+            type="text"
+            name="email"
+            th:field="*{username}"
+            placeholder="введите email"/>
+    <label>password</label>
+    <input
+            type="password"
+            name="password"
+            th:field="*{password}"
+            placeholder="введите пароль"/>
+    <label>роль</label>
+    <input
+            type="text"
+            name="roles"
+            th:field="*{roles}"
+            placeholder="роль"/>
 
-                        <button type="submit">
-                            Submit
-                        </button>
+    <button type="submit">
+        Submit
+    </button>
 
 
-                </form>
+</form>
 
 </body>
 </html>

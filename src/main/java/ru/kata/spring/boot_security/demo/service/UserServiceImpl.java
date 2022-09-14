@@ -17,12 +17,13 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
+    BCryptPasswordEncoder passwordEncoder ;
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-@Transactional
+
+    @Transactional(readOnly = true)
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -42,7 +43,8 @@ public class UserServiceImpl implements UserService {
         user1.setUsername(user.getUsername());
         userRepository.saveAndFlush(user1);
     }
-@Transactional
+
+    @Transactional(readOnly = true)
     @Override
     public User getUser(int id) {
         return userRepository.getById(id);
@@ -51,7 +53,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User updateUser(User user) {
-        User user1 = new User();
+        User user1 = userRepository.getUserByUsername(user.getUsername());
         user1.setPassword(passwordEncoder.encode(user.getPassword()));
         user1.setName(user.getName());
         user1.setSurname(user.getSurname());
@@ -60,9 +62,10 @@ public class UserServiceImpl implements UserService {
         user1.setFn(user.getFn());
         user1.setId(user.getId());
         user1.setUsername(user.getUsername());
-        return userRepository.saveAndFlush(user);
+        return userRepository.saveAndFlush(user1);
     }
-@Transactional
+
+    @Transactional(readOnly = true)
     @Override
     public User getByUsername(String email) {
         return userRepository.getUserByUsername(email);
@@ -75,7 +78,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.getUserByUsername(username);
         if (user == null) {
@@ -85,3 +88,4 @@ public class UserServiceImpl implements UserService {
                 .User(user.getUsername(), user.getPassword(), user.getAuthorities());
     }
 }
+//

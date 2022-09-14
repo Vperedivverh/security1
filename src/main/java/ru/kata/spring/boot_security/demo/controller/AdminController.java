@@ -50,7 +50,7 @@ public class AdminController {
     public String createUser(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        return "users";
+        return "create";
     }
 
     @PostMapping("/admin/users/{id}")
