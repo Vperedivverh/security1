@@ -9,7 +9,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 @Service("UserDetailsServiceImpl")
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements MyUserDetailsService {
 
     private final UserRepository userRepository;
 
